@@ -1,9 +1,4 @@
 from ui import ui_print
-# @ -> our hero
-# G -> ghosts
-#P -> pills
-# . -> empty spaces
-# | and - -> walls
 
 map = [
     '|--------|',
@@ -26,6 +21,7 @@ def find_pacman(map):
 
     return pacman_x, pacman_y
 
+
 def move_pacman(map, next_pacman_x, next_pacman_y):
     pacman_x, pacman_y = find_pacman(map)
 
@@ -36,4 +32,33 @@ def move_pacman(map, next_pacman_x, next_pacman_y):
     map[next_pacman_x] = new_row_2
 
 
-ui_print(map)
+def play(map, key): 
+    # a -> left
+    # d -> right
+    # s -> down
+    # w -> up
+    next_x, next_y = next_position(map, key)
+    move_pacman(map, next_x, next_y)
+
+
+def next_position(map, key):
+    x, y = find_pacman(map)
+    next_x = -1
+    next_y = -1
+
+    if key == 'a':
+        next_x = x
+        next_y = y - 1
+    elif key == 'd':
+        next_x = x
+        next_y = y + 1
+    elif key == 'w':
+        next_y = y
+        next_x = x - 1
+    elif key == 's':
+        next_y = y
+        next_x = x + 1
+    
+    return next_x, next_y
+
+    
