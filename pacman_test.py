@@ -1,6 +1,6 @@
 import unittest
 
-from pacman import find_pacman, move_pacman, next_position, is_a_ghost, is_a_wall, is_within_borders, total_pills
+from pacman import find_pacman, move_pacman, next_position, is_a_ghost, is_a_wall, is_within_borders, total_pills, find_ghosts
 
 map_with_pacman = [
     "|--------|",
@@ -71,6 +71,11 @@ class PacmanTest (unittest.TestCase):
         self.assertEqual(test_false, False)
     
     def test_total_pills(self):
-        pillsCount = total_pills(map_with_pacman)
+        pills_count = total_pills(map_with_pacman)
 
-        self.assertEqual(pillsCount, 2)
+        self.assertEqual(pills_count, 2)
+
+    def test_find_ghosts(self):
+        ghosts = find_ghosts(map_with_pacman)
+
+        self.assertEqual(ghosts, [[1, 1], [1, 7], [3, 1]])
