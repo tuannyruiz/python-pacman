@@ -17,9 +17,9 @@ while not game_finished:
     key = ui_key();
     valid_key, pacman_alive, pacman_won = play(map, key)
 
-    move_ghosts(map)
+    pacman_was_hit = move_ghosts(map)
 
-    if not pacman_alive:
+    if not pacman_alive or pacman_was_hit:
         ui_msg("You died :(")
         game_finished = True
     elif pacman_won:

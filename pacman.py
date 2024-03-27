@@ -64,6 +64,12 @@ def is_a_wall(map, next_x, next_y):
 def is_a_ghost(map, next_x, next_y):
     return map[next_x][next_y] == 'G'
 
+def is_a_pill(map, next_x, next_y):
+    return map[next_x][next_y] == 'P'
+
+def is_pacman(map, next_x, next_y):
+    return map[next_x][next_y] == '@'
+
 def find_ghosts(map):
     all_ghosts = []
     for x in range(len(map)):
@@ -89,11 +95,21 @@ def move_ghosts(map):
         next_ghost_x = possible_directions[random_number][0]
         next_ghost_y = possible_directions[random_number][1]
 
+        if (is_a_wall(map, next_ghost_x, next_ghost_y) 
+            or is_a_ghost(map, next_ghost_x, next_ghost_y) 
+            or is_a_pill(map, next_ghost_x, next_ghost_y)):
+            continue
+
+        if is_pacman(map, next_ghost_x, next_ghost_y):
+            return True
+
         new_row = map[ghost_x][0:ghost_y] + '.' + map[ghost_x][ghost_y + 1:]
         map[ghost_x] = new_row
 
         new_row_2 = map[next_ghost_x][0:next_ghost_y] + 'G' + map[next_ghost_x][next_ghost_y + 1:]
         map[next_ghost_x] = new_row_2
+
+        return False
 
 # play() returns 3 booleans: 
     # isMovementLegal, isPacManAlive, hasPacManWon
