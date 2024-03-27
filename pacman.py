@@ -38,6 +38,16 @@ def play(map, key):
     # s -> down
     # w -> up
     next_x, next_y = next_position(map, key)
+
+    is_an_invalid_key = next_x == -1 and next_y == -1
+    if is_an_invalid_key:
+        return False
+    
+    is_within_borders = is_within_borders(map, next_x, next_y)
+
+    if not is_within_borders:
+        return False
+    
     move_pacman(map, next_x, next_y)
 
 
@@ -61,4 +71,10 @@ def next_position(map, key):
     
     return next_x, next_y
 
-    
+def is_within_borders(map, next_x, next_y):
+    number_of_rows = len(map)
+    number_of_columns = len(map[0])
+    x_is_valid = 0 <= next_x < number_of_rows
+    y_is_valid = 0 <= next_y < number_of_columns
+
+    return x_is_valid and y_is_valid

@@ -35,14 +35,16 @@ class PacmanTest (unittest.TestCase):
         self.assertEqual(y, -1)
 
     def test_move_pacman(self):
-        move_pacman(map_with_pacman, 4, 1)
-        new_x, new_y = find_pacman(map_with_pacman)
+        moveMap = map_with_pacman
+        move_pacman(moveMap, 4, 1)
+        new_x, new_y = find_pacman(moveMap)
 
         self.assertEqual(new_x, 4)
         self.assertEqual(new_y, 1)
 
-    # def test_next_position(self):
-    #     next_x, next_y = next_position(map_with_pacman, 'd')
+    def test_next_position(self):
+        nextPosMap = map_with_pacman
+        next_x, next_y = next_position(nextPosMap, 'd')
 
-    #     self.assertEqual(next_x, 4)
-    #     self.assertEqual(next_y, 2)
+        self.assertEqual(next_x, 4)
+        self.assertEqual(next_y, 2)
