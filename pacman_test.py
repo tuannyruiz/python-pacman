@@ -1,6 +1,6 @@
 import unittest
 
-from pacman import find_pacman, move_pacman, next_position
+from pacman import find_pacman, move_pacman, next_position, is_a_ghost, is_a_wall
 
 map_with_pacman = [
     "|--------|",
@@ -48,3 +48,18 @@ class PacmanTest (unittest.TestCase):
 
         self.assertEqual(next_x, 4)
         self.assertEqual(next_y, 2)
+
+    def test_is_a_ghost(self):
+        test_true = is_a_ghost(map_with_pacman, 1, 1)
+        test_false = is_a_ghost(map_with_pacman, 2, 4)
+
+        self.assertEqual(test_true, True)
+        self.assertEqual(test_false, False)
+
+    def test_is_a_wall(self):
+        test_true = is_a_wall(map_with_pacman, 0, 0)
+        test_false = is_a_wall(map_with_pacman, 3, 5)
+
+        self.assertEqual(test_true, True)
+        self.assertEqual(test_false, False)
+    

@@ -31,7 +31,8 @@ def move_pacman(map, next_pacman_x, next_pacman_y):
     new_row_2 = map[next_pacman_x][0:next_pacman_y] + '@' + map[next_pacman_x][next_pacman_y + 1:]
     map[next_pacman_x] = new_row_2
 
-
+# Return two booleans: 
+    # isMovementLegal & isPacManAlive
 def play(map, key): 
     # a -> left
     # d -> right
@@ -41,14 +42,19 @@ def play(map, key):
 
     is_an_invalid_key = next_x == -1 and next_y == -1
     if is_an_invalid_key:
-        return False
+        return False, True
     
-    is_within_borders = is_within_borders(map, next_x, next_y)
-
-    if not is_within_borders:
-        return False
+    if not is_within_borders(map, next_x, next_y):
+        return False, True
+    
+    if is_a_wall(map, next_x, next_y):
+        return False, True
+    
+    if is_a_ghost(map, next_x, next_y):
+        return True, False
     
     move_pacman(map, next_x, next_y)
+    return True, True
 
 
 def next_position(map, key):
@@ -78,3 +84,9 @@ def is_within_borders(map, next_x, next_y):
     y_is_valid = 0 <= next_y < number_of_columns
 
     return x_is_valid and y_is_valid
+
+def is_a_wall(map, next_x, next_y):
+    return map[next_x][next_y] == '|' or map[next_x][next_y] == '-'
+
+def is_a_ghost(map, next_x, next_y):
+    return map[next_x][next_y] == 'G'
