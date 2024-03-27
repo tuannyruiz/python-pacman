@@ -1,6 +1,6 @@
 import unittest
 
-from pacman import find_pacman, move_pacman, next_position, is_a_ghost, is_a_wall
+from pacman import find_pacman, move_pacman, next_position, is_a_ghost, is_a_wall, is_within_borders, total_pills
 
 map_with_pacman = [
     "|--------|",
@@ -62,4 +62,15 @@ class PacmanTest (unittest.TestCase):
 
         self.assertEqual(test_true, True)
         self.assertEqual(test_false, False)
+
+    def test_is_within_borders(self):
+        test_true = is_within_borders(map_with_pacman, 2, 4)
+        test_false = is_within_borders(map_with_pacman, 3, 10)
+
+        self.assertEqual(test_true, True)
+        self.assertEqual(test_false, False)
     
+    def test_total_pills(self):
+        pillsCount = total_pills(map_with_pacman)
+
+        self.assertEqual(pillsCount, 2)
